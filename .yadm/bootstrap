@@ -3,9 +3,8 @@
 # Install yay (aur helper)
 if command -v yay >/dev/null 2>&1; then
     echo "Installing yay"
-    installdir=~/.yay-install-$$
-    git clone https://aur.archlinux.org/yay.git $installdir
-    cd $installdir
+    git clone https://aur.archlinux.org/yay.git
+    cd yay
     cat PKGBUILD
     read -p "Continue? [y/N] " -n 1 -r
     echo
@@ -14,7 +13,7 @@ if command -v yay >/dev/null 2>&1; then
     else
 	echo "Skipped yay install"
     fi
-    rm -rf $installdir
+    rm -rf yay
 fi
 
 # Install antigen (zsh plugin manager)
@@ -30,4 +29,19 @@ if command -v nvim >/dev/null 2>&1; then
     nvim '+PlugInstall' '+PlugUpdate' '+PlugClean!' '+UpdateRemotePlugins' '+qall'
 else
     echo "Warning: nvim missing. Run bootstrap again after installing"
+fi
+
+# Create irssi.pem
+# This allows irc authentication without storing passwords in irssi config
+# See https://wiki.archlinux.org/index.php/Irssi#Client_certificates
+if [ ! -f "~/.irssi/irssi.pem" ]; then
+    echo "Creating irssi.pem for irc authentication"
+    echo "Enter country code and . for all other prompts"
+    openssl req -newkey rsa:2048 -days 730 -x509 -keyout irssi.key -out irssi.crt -nodes
+    cat irssi.crt irssi.key > ~/.irssi/irssi.pem
+    chmod 600 ~/.irssi/irssi.pem
+    rm irssi.crt irssi.key
+    fingerprint="$(openssl x509 -sha1 -fingerprint -noout -in ~/.irssi/irssi.pem | sed -e 's/^.*=//;s/://g;y/ABCDEF/abcdef/')"
+    echo "Send your fingerprint to NickServ for each server:"
+    echo "/msg NickServ cert add $fingerprint"
 fi
