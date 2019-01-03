@@ -24,15 +24,12 @@ if ! command -v yay >/dev/null 2>&1; then
   rm -rf yay
 fi
 
-# Install antigen (zsh plugin manager)
-if ! command -v antigen >/dev/null 2>&1; then
-  yay -S antigen-git
-fi
+yay -S --needed antigen-git
 
 # Set up neovim with vim-plug
 if command -v nvim >/dev/null 2>&1; then
   echo "Bootstrapping neovim"
-  if [ ! -f "~/.local/share/nvim/site/autoload/plug.vim" ]; then
+  if [ ! -f "$HOME/.local/share/nvim/site/autoload/plug.vim" ]; then
       curl -fLo "~/.local/share/nvim/site/autoload/plug.vim" --create-dirs \
           "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
   fi
@@ -44,7 +41,7 @@ fi
 # Create irssi.pem
 # This allows irc authentication without storing passwords in irssi config
 # See https://wiki.archlinux.org/index.php/Irssi#Client_certificates
-if [ ! -f "~/.irssi/irssi.pem" ]; then
+if [ ! -f "$HOME/.irssi/irssi.pem" ]; then
   echo "Creating irssi.pem for irc authentication"
   echo "Enter country code and . for all other prompts"
   openssl req -newkey rsa:2048 -days 730 -x509 -keyout irssi.key -out irssi.crt -nodes
