@@ -1,10 +1,26 @@
 [user]
-	email = tcl293@gmail.com
-	name = Thomas Lent
-
-[alias]
-        co = checkout
-
+  email = tcl293@gmail.com
+  name = Thomas Lent
 [core]
-	excludesfile = ~/.gitignore
+  excludesfile = ~/.gitignore
+  pager = less -XRMIQ
+[merge]
+  tool = vimdiff
+[diff]
+  tool = vimdiff
+[difftool]
+  prompt = false
+[log]
+  decorate = short
+  abbrevCommit = true
+[color]
+  diff = auto
+  status = auto
+  branch = auto
+[alias]
+  co = checkout
+  lg = log --graph
+  pr = pull --rebase
+  wd = diff --word-diff --word-diff-regex=.
+  st = status -s
 
