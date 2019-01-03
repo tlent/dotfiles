@@ -5,51 +5,53 @@
 
 # Help bat find theme
 if command -v bat >/dev/null 2>&1; then
-    bat cache --init
+  bat cache --init
 fi
 
-# Install yay (aur helper)
-if command -v yay >/dev/null 2>&1; then
-    echo "Installing yay"
-    git clone https://aur.archlinux.org/yay.git
-    cd yay
-    cat PKGBUILD
-    read -p "Continue? [y/N] " -n 1 -r
-    echo
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
-        makepkg -si
-    else
-	echo "Skipped yay install"
-    fi
-    rm -rf yay
+# Install yay (aur helper) if not installed
+if ! command -v yay >/dev/null 2>&1; then
+  echo "Installing yay"
+  git clone https://aur.archlinux.org/yay.git
+  cd yay
+  cat PKGBUILD
+  read -p "Continue? [y/N] " -n 1 -r
+  echo
+  if [[ $REPLY =~ ^[Yy]$ ]]; then
+      makepkg -si
+  else
+    echo "Skipped yay install"
+  fi
+  rm -rf yay
 fi
 
 # Install antigen (zsh plugin manager)
-yay -S antigen-git
+if ! command -v antigen >/dev/null 2>&1; then
+  yay -S antigen-git
+fi
 
 # Set up neovim with vim-plug
 if command -v nvim >/dev/null 2>&1; then
-    echo "Bootstrapping neovim"
-    if [ ! -f "~/.local/share/nvim/site/autoload/plug.vim" ]; then
-        curl -fLo "~/.local/share/nvim/site/autoload/plug.vim" --create-dirs \
-            "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
-    fi
-    nvim '+PlugInstall' '+PlugUpdate' '+PlugClean!' '+UpdateRemotePlugins' '+qall'
+  echo "Bootstrapping neovim"
+  if [ ! -f "~/.local/share/nvim/site/autoload/plug.vim" ]; then
+      curl -fLo "~/.local/share/nvim/site/autoload/plug.vim" --create-dirs \
+          "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+  fi
+  nvim '+PlugInstall' '+PlugUpdate' '+PlugClean!' '+UpdateRemotePlugins' '+qall'
 else
-    echo "nvim not installed"
+  echo "nvim not installed"
 fi
 
 # Create irssi.pem
 # This allows irc authentication without storing passwords in irssi config
 # See https://wiki.archlinux.org/index.php/Irssi#Client_certificates
 if [ ! -f "~/.irssi/irssi.pem" ]; then
-    echo "Creating irssi.pem for irc authentication"
-    echo "Enter country code and . for all other prompts"
-    openssl req -newkey rsa:2048 -days 730 -x509 -keyout irssi.key -out irssi.crt -nodes
-    cat irssi.crt irssi.key > ~/.irssi/irssi.pem
-    chmod 600 ~/.irssi/irssi.pem
-    rm irssi.crt irssi.key
-    fingerprint="$(openssl x509 -sha1 -fingerprint -noout -in ~/.irssi/irssi.pem | sed -e 's/^.*=//;s/://g;y/ABCDEF/abcdef/')"
-    echo "Send your fingerprint to NickServ for each server:"
-    echo "/msg NickServ cert add $fingerprint"
+  echo "Creating irssi.pem for irc authentication"
+  echo "Enter country code and . for all other prompts"
+  openssl req -newkey rsa:2048 -days 730 -x509 -keyout irssi.key -out irssi.crt -nodes
+  cat irssi.crt irssi.key > ~/.irssi/irssi.pem
+  chmod 600 ~/.irssi/irssi.pem
+  rm irssi.crt irssi.key
+  fingerprint="$(openssl x509 -sha1 -fingerprint -noout -in ~/.irssi/irssi.pem | sed -e 's/^.*=//;s/://g;y/ABCDEF/abcdef/')"
+  echo "Send your fingerprint to NickServ for each server:"
+  echo "/msg NickServ cert add $fingerprint"
 fi
