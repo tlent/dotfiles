@@ -1,0 +1,10 @@
+[user]
+	email = tcl293@gmail.com
+	name = Thomas Lent
+
+[alias]
+        co = checkout
+
+[core]
+	excludesfile = ~/.gitignore
+

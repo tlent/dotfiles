@@ -1,0 +1,77 @@
+#!/bin/sh
+
+# Default i3lock colors
+Blank='#00000000'
+Clear='#ffffff22'
+Default='#ff00ffcc'
+Text='#ee00eeee'
+Wrong='#880000bb'
+Verifying='#bb00bbbb'
+
+fg_gray=#928374
+fg_red=#fb4934
+fg_green=#b8bb26
+fg_yellow=#fabd2f
+fg_blue=#83a598
+fg_purple=#d3869b
+fg_aqua=#8ec07c
+fg=#ebdbb2
+
+bg_red=#cc241d
+bg_yellow=#d79921
+bg_blue=#458588
+bg_aqua=#689d6a
+bg_orange=#d65d0e
+
+bg=#1d2021
+bg1=#3c3836
+bg2=#504945
+bg3=#665c54
+
+Inside="${fg}bb"
+Background="${bg}"
+
+RingVerifying="${Blank}"
+RingWrong="${Blank}"
+RingDefault="${Blank}"
+
+Line=$Blank
+Separator=$Blank
+
+Text="${bg}ee"
+VerifyingText="${Text}"
+WrongText="${Text}"
+
+KeyHighlight="${Blank}"
+BackspaceHighlight="${Blank}"
+
+mpc pause
+playerctl pause
+i3lock \
+--indicator                         \
+--insidevercolor=$Inside            \
+--ringvercolor=$RingVerifying       \
+\
+--insidewrongcolor=$Inside          \
+--ringwrongcolor=$RingWrong         \
+\
+--insidecolor=$Inside               \
+--ringcolor=$RingDefault            \
+--linecolor=$Line                   \
+--separatorcolor=$Separator         \
+\
+--verifcolor=$VerifyingText         \
+--wrongcolor=$WrongText             \
+--timecolor=$Text                   \
+--datecolor=$Text                   \
+--layoutcolor=$Text                 \
+--keyhlcolor=$KeyHighlight          \
+--bshlcolor=$BackspaceHighlight     \
+\
+--color=$Background                 \
+--clock                             \
+--timestr="%l:%M %p"             \
+--datestr="%x"                      \
+--beep                              \
+--radius 140                        \
+
