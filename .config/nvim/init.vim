@@ -21,6 +21,11 @@ Plug 'junegunn/fzf.vim'
 call plug#end()
 
 filetype plugin indent on
+set tabstop=2
+set shiftwidth=2
+set autoindent
+set shiftround
+set expandtab
 
 colorscheme base16-gruvbox-dark-hard
 set termguicolors
