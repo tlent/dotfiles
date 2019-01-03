@@ -1,13 +1,5 @@
 #!/bin/bash
 
-# Expects bat and neovim to be installed
-# Skips their config if they are not
-
-# Help bat find theme
-if command -v bat >/dev/null 2>&1; then
-  bat cache --init
-fi
-
 # Install yay (aur helper) if not installed
 if ! command -v yay >/dev/null 2>&1; then
   echo "Installing yay"
@@ -24,19 +16,18 @@ if ! command -v yay >/dev/null 2>&1; then
   rm -rf yay
 fi
 
-yay -S --needed antigen-git
+yay -S --needed antigen-git bat neovim
+
+# Help bat find theme
+bat cache --init
 
 # Set up neovim with vim-plug
-if command -v nvim >/dev/null 2>&1; then
-  echo "Bootstrapping neovim"
-  if [ ! -f "$HOME/.local/share/nvim/site/autoload/plug.vim" ]; then
-      curl -fLo "~/.local/share/nvim/site/autoload/plug.vim" --create-dirs \
-          "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
-  fi
-  nvim '+PlugInstall' '+PlugUpdate' '+PlugClean!' '+UpdateRemotePlugins' '+qall'
-else
-  echo "nvim not installed"
+echo "Bootstrapping neovim"
+if [ ! -f "$HOME/.local/share/nvim/site/autoload/plug.vim" ]; then
+    curl -fLo "~/.local/share/nvim/site/autoload/plug.vim" --create-dirs \
+        "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
 fi
+nvim '+PlugInstall' '+PlugUpdate' '+PlugClean!' '+UpdateRemotePlugins' '+qall'
 
 # Create irssi.pem
 # This allows irc authentication without storing passwords in irssi config
