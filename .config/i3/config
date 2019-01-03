@@ -188,9 +188,9 @@ bindsym $mod+equal workspace next
 # These commands take a screenshot, save it in /tmp, and copy the image to the clipboard
 
 # Full screen
-bindsym Print exec "scrot /tmp/screenshot-$(date +%F_%T).png -e 'xclip -selection -c -t image/png < $f'"
+bindsym Print exec --no-startup-id "scrot /tmp/screenshot-$(date +%F_%T).png -e 'xclip -selection c -t image/png < $f'"
 # Selected area
-bindsym Control+Print --release exec "scrot /tmp/screenshot-$(date +%F_%T).png -e 'xclip selection -c -t image/png <$F'"
+bindsym Control+Print --release exec --no-startup-id "scrot -s /tmp/screenshot-$(date +%F_%T).png -e 'xclip -selection c -t image/png <$f'"
 
 # Power keybinds
 set $powermods Mod1+Shift+Control
