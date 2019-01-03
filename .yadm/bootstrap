@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# Install yay (aur helper)
+if command -v yay >/dev/null 2>&1; then
+    echo "Installing yay"
+    installdir=~/.yay-install-$$
+    git clone https://aur.archlinux.org/yay.git $installdir
+    cd $installdir
+    cat PKGBUILD
+    read -p "Continue? [y/N] " -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        makepkg -si
+    else
+	echo "Skipped yay install"
+    fi
+    rm -rf $installdir
+fi
+
+# Install antigen (zsh plugin manager)
+yay -S antigen-git
+
+# Set up neovim with vim-plug
+if command -v nvim >/dev/null 2>&1; then
+    echo "Bootstrapping neovim"
+    if [ ! -f "~/.local/share/nvim/site/autoload/plug.vim" ]; then
+        curl -fLo "~/.local/share/nvim/site/autoload/plug.vim" --create-dirs \
+            "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+    fi
+    nvim '+PlugInstall' '+PlugUpdate' '+PlugClean!' '+UpdateRemotePlugins' '+qall'
+else
+    echo "Warning: nvim missing. Run bootstrap again after installing"
+fi
