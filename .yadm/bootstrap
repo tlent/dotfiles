@@ -1,5 +1,13 @@
 #!/bin/bash
 
+# Expects bat and neovim to be installed
+# Skips their config if they are not
+
+# Help bat find theme
+if command -v bat >/dev/null 2>&1; then
+    bat cache --init
+fi
+
 # Install yay (aur helper)
 if command -v yay >/dev/null 2>&1; then
     echo "Installing yay"
@@ -28,7 +36,7 @@ if command -v nvim >/dev/null 2>&1; then
     fi
     nvim '+PlugInstall' '+PlugUpdate' '+PlugClean!' '+UpdateRemotePlugins' '+qall'
 else
-    echo "Warning: nvim missing. Run bootstrap again after installing"
+    echo "nvim not installed"
 fi
 
 # Create irssi.pem
