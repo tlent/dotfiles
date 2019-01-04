@@ -48,7 +48,9 @@ hsetroot -solid "#7F4145"
 redshift &
 
 # Start sleep timer
-xautolock -time 20 -locker "$HOME/bin/lock; systemctl suspend" &
+xidlehook --not-when-fullscreen \
+  --timer primary 600 "$HOME/.yadm/bin/lock" "" \
+  --timer normal 3000 "$HOME/.yadm/bin/suspend-if-no-audio" "" &
 
 # Start i3
 exec i3

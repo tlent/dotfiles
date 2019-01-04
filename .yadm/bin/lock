@@ -45,8 +45,6 @@ WrongText="${Text}"
 KeyHighlight="${Blank}"
 BackspaceHighlight="${Blank}"
 
-mpc pause
-playerctl pause
 i3lock \
 --indicator                         \
 --insidevercolor=$Inside            \
