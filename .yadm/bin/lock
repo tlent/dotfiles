@@ -28,48 +28,44 @@ bg1=#3c3836
 bg2=#504945
 bg3=#665c54
 
-Inside="${fg}bb"
+Inside="${bg}bb"
 Background="${bg}"
 
-RingVerifying="${Blank}"
-RingWrong="${Blank}"
-RingDefault="${Blank}"
+RingVerifying="${fg_yellow}bb"
+RingWrong="${bg_red}bb"
+RingDefault="${fg}bb"
 
 Line=$Blank
 Separator=$Blank
 
-Text="${bg}ee"
+Text="${fg}ee"
 VerifyingText="${Text}"
 WrongText="${Text}"
 
-KeyHighlight="${Blank}"
-BackspaceHighlight="${Blank}"
+KeyHighlight="${fg_red}bb"
+BackspaceHighlight="${KeyHighlight}"
 
 i3lock \
---indicator                         \
---insidevercolor=$Inside            \
---ringvercolor=$RingVerifying       \
-\
---insidewrongcolor=$Inside          \
---ringwrongcolor=$RingWrong         \
+--color=$Background                 \
+--clock                             \
+--beep                              \
+--timestr="%l:%M %p"                \
+--datestr="%F"                      \
+--radius 100                        \
 \
 --insidecolor=$Inside               \
+--insidevercolor=$Inside            \
+--insidewrongcolor=$Inside          \
 --ringcolor=$RingDefault            \
+--ringvercolor=$RingVerifying       \
+--ringwrongcolor=$RingWrong         \
 --linecolor=$Line                   \
 --separatorcolor=$Separator         \
-\
+--datecolor=$Text                   \
+--timecolor=$Text                   \
 --verifcolor=$VerifyingText         \
 --wrongcolor=$WrongText             \
---timecolor=$Text                   \
---datecolor=$Text                   \
 --layoutcolor=$Text                 \
 --keyhlcolor=$KeyHighlight          \
 --bshlcolor=$BackspaceHighlight     \
-\
---color=$Background                 \
---clock                             \
---timestr="%l:%M %p"             \
---datestr="%x"                      \
---beep                              \
---radius 140                        \
 
