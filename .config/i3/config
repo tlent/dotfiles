@@ -194,11 +194,11 @@ bindsym Control+Print --release exec --no-startup-id "maim -s | tee /tmp/screens
 
 # Power keybinds
 set $powermods Mod1+Shift+Control
-bindsym $powermods+l exec --no-startup-id ~/bin/lock
+bindsym $powermods+l exec --no-startup-id $HOME/.yadm/bin/lock
 bindsym $powermods+r exec --no-startup-id reboot
 bindsym $powermods+f exec --no-startup-id "shutdown 0"
-bindsym $powermods+h exec --no-startup-id "~/bin/lock && systemctl hibernate"
-bindsym $powermods+s exec --no-startup-id "~/bin/lock && systemctl suspend"
+bindsym $powermods+h exec --no-startup-id "$HOME/.yadm/bin/lock && systemctl hibernate"
+bindsym $powermods+s exec --no-startup-id "$HOME/.yadm/bin/lock && systemctl suspend"
 
 bindsym XF86AudioRaiseVolume exec --no-startup-id "amixer set Master 2%+"
 bindsym XF86AudioLowerVolume exec --no-startup-id "amixer set Master 2%-"
@@ -219,5 +219,5 @@ smart_gaps on
 exec_always --no-startup-id ~/.config/polybar/launch.sh
 
 # Lock screen on start
-exec --no-startup-id ~/bin/lock
+exec --no-startup-id $HOME/.yadm/bin/lock
 
