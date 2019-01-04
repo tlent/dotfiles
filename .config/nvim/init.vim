@@ -33,6 +33,7 @@ set termguicolors
 let g:airline_powerline_fonts = 1
 
 set number
+set hidden
 
 inoremap jj <Esc>
 
@@ -50,11 +51,16 @@ nnoremap <silent> <leader>r         :Buffers<CR>
 let g:python_host_prog = '/usr/bin/python2'
 let g:python3_host_prog = '/usr/bin/python3'
 
+" Syntastic
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
 " Rust
 let g:rustfmt_autosave = 1
 
 " LanguageClient
-set hidden
 let g:LanguageClient_autoStart = 1
 let g:LanguageClient_serverCommands = {
     \ 'rust': ['rustup', 'run', 'stable', 'rls'],
