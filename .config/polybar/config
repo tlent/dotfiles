@@ -75,7 +75,7 @@ label-urgent-padding-left = 1
 type = internal/date
 interval = 1
 
-date = %I:%M %p
+date = %l:%M %p
 date-alt = %a %F
 
 label = %date%
