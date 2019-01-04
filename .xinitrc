@@ -48,7 +48,7 @@ hsetroot -solid "#7F4145"
 redshift &
 
 # Start sleep timer
-xautolock -time 15 -locker "~/bin/lock && systemctl suspend" &
+xautolock -time 20 -locker "$HOME/bin/lock; systemctl suspend" &
 
 # Start i3
 exec i3
