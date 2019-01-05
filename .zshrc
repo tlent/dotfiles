@@ -1,8 +1,6 @@
 export EDITOR="nvim"
 alias vim=nvim
 
-export BAT_THEME="base16-gruvbox-dark-hard"
-
 setopt NO_NOMATCH # See https://github.com/robbyrussell/oh-my-zsh-issues/449
 setopt HIST_IGNORE_SPACE
 
@@ -45,6 +43,11 @@ eval "$(pyenv virtualenv-init -)"
 source /usr/share/nvm/init-nvm.sh
 source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
+
+export BAT_THEME="base16-gruvbox-dark-hard"
+
+export FZF_DEFAULT_COMMAND='rg --files --hidden --follow -g "!{.git,node_modules}/*" 2>/dev/null'
+export FZF_CTRL_T_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,node_modules}/*" 2>/dev/null'
 
 eval "$(direnv hook zsh)"
 
