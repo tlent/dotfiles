@@ -32,6 +32,9 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
  unset f
 fi
 
+# Set cursor
+xsetroot -cursor_name left_ptr
+
 # Set key repeat delay and rate
 xset r rate 350 50
 
@@ -52,5 +55,8 @@ xidlehook --not-when-fullscreen \
   --timer primary 600 "$HOME/.yadm/bin/lock" "" \
   --timer normal 3000 "$HOME/.yadm/bin/suspend-if-no-audio" "" &
 
-# Start i3
-exec i3
+# Lock the screen initially
+$HOME/.yadm/bin/lock
+
+# Start wm
+exec $HOME/.config/bspwm/wm
