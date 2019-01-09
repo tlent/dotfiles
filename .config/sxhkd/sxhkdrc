@@ -8,7 +8,7 @@ super + f
   firefox
 
 Print
-  maim | tee /tmp/screenshot-$(date +%F_%T).png | xclip -selection c -t image/png 
+  maim | tee /tmp/screenshot-$(date +%F_%T).png | xclip -selection c -t image/png
 
 control + Print
   maim -s | tee /tmp/screenshot-$(date +%F_%T).png | xclip -selection c -t image/png
@@ -52,13 +52,12 @@ XF86AudioNext
 
 # Apply bspwm config
 super + shift + e
-  $HOME/.config/bspwm/bspwmrc
+  $HOME/.config/bspwm/bspwmrc reload
 
 # Reload sxhkd config
 super + shift + r
   pkill -USR1 -x sxhkd
 
-# Restart or kill bspwm (depends on wm script)
-super + alt {_,shift +}Escape
-  bspc {wm -d > "$BSPWM_STATE" && bspc quit,\
-        quit 1}
+# Restart bspwm
+super + alt + Escape
+  bspc quit

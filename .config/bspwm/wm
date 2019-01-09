@@ -1,5 +1,6 @@
 #!/bin/sh
 
-while true ; do
-  bspwm || break
-done
+sxhkd &
+polybar --reload top &
+
+bspwm

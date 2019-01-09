@@ -1,12 +1,3 @@
 #!/bin/sh
 
-if ! pgrep -U $UID -x "sxhkd">/dev/null; then
-  sxhkd &
-fi
-
-if ! pgrep -U $UID -x "polybar">/dev/null; then
-  polybar --reload top &
-fi
-
 bspc monitor -d 1 2 3 4 5 6 7 8 9 10
-
