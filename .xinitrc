@@ -52,11 +52,7 @@ redshift &
 
 # Start sleep timer
 xidlehook --not-when-fullscreen \
-  --timer primary 600 "$HOME/.yadm/bin/lock" "" \
-  --timer normal 3000 "$HOME/.yadm/bin/suspend-if-no-audio" "" &
-
-# Lock the screen initially
-$HOME/.yadm/bin/lock
+  --timer primary 3600 "$HOME/.yadm/bin/suspend-if-no-audio" "" &
 
 # Start wm
 exec $HOME/.config/bspwm/wm

@@ -1,3 +1,45 @@
+super + {_,shift +}{h,j,k,l}
+  bspc node --{focus,swap} {west,south,north,east}
+
+super + {_, shift +}{1-9,0}
+  bspc {desktop --focus, node --to-desktop} '^{1-9,10}'
+
+super + m
+  bspc desktop --layout next
+
+super + {_, shift +}q
+  bspc node --{close,kill}
+
+super + alt + {h,j,k,l}
+  bspc node --resize {left -20 0,bottom 0 20,top 0 -20,right 20 0}
+
+super + alt + shift + {h,j,k,l}
+  bspc node --resize {right -20 0,top 0 20,bottom 0 -20,left 20 0}
+
+super + {t,shift + t,s,alt + Return}
+  bspc node --state '~{tiled,pseudo_tiled,floating,fullscreen}' || bspc node --state tiled
+
+super + {_,shift + }c
+  bspc node --focus {next,prev}.local
+
+super + bracket{left,right}
+  bspc desktop --focus {prev,next}.local
+
+super + {r,Tab}
+  bspc {node,desktop} --focus last
+
+super + ctrl + {h,j,k,l}
+  bspc node --presel-dir {west,south,north,east}
+
+super + ctrl + {1-9,0}
+  bspc node --presel-ratio 0.{1-9,61803}
+
+super + ctrl + space
+  bspc node --presel-dir cancel
+
+super + ctrl + shift + space
+  bspc query --nodes --desktop | xargs -I id --max-args=1 bspc node id --presel-dir cancel
+
 super + Return
   alacritty
 
@@ -13,21 +55,8 @@ Print
 control + Print
   maim -s | tee /tmp/screenshot-$(date +%F_%T).png | xclip -selection c -t image/png
 
-super + {_,shift +}{h,j,k,l}
-  bspc node -{f,s} {west,south,north,east}
-
-super + {_, shift +}q
-  bspc node -{c,k}
-
-super + {_, shift +}{1-9,0}
-  bspc {desktop -f, node -d} '^{1-9,10}'
-
-control + shift + alt + {l,s,h,r,f}
-  {"$HOME/.yadm/bin/lock",\
-  "$HOME/.yadm/bin/lock" && systemctl suspend,\
-  "$HOME/.yadm/bin/lock" && systemctl hibernate,\
-  systemctl reboot,\
-  systemctl poweroff}
+control + shift + alt + {s,h,r,f}
+  {systemctl suspend,systemctl hibernate,systemctl reboot,systemctl poweroff}
 
 XF86AudioRaiseVolume
   amixer set Master 2%+
@@ -56,7 +85,7 @@ super + shift + e
 
 # Reload sxhkd config
 super + shift + r
-  pkill -USR1 -x sxhkd
+  pkill --signal USR1 --uid $UID --exact sxhkd
 
 # Restart bspwm
 super + alt + Escape
