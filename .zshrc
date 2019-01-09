@@ -31,23 +31,21 @@ bindkey '^[[A' history-substring-search-up
 # Down arrow
 bindkey '^[[B' history-substring-search-down
 
+export BAT_THEME="base16-gruvbox-dark-hard"
+export FZF_DEFAULT_COMMAND='rg --files --hidden --follow -g "!{.git,node_modules}/*" 2>/dev/null'
+export FZF_CTRL_T_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,node_modules}/*" 2>/dev/null'
+export VIRTUAL_ENV_DISABLE_PROMPT=1
+
 CARGO_PATH="$HOME/.cargo/bin"
 YARN_PATH="$(yarn global bin)"
 PIP_PATH="$(python -m site --user-base)/bin"
 CS140E_PATH="/usr/local/bin/aarch64-none-elf/bin"
 export PATH="$CARGO_PATH:$YARN_PATH:$PIP_PATH:$CS140E_PATH:$PATH"
 
-export VIRTUAL_ENV_DISABLE_PROMPT=1
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 source /usr/share/nvm/init-nvm.sh
 source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
-
-export BAT_THEME="base16-gruvbox-dark-hard"
-
-export FZF_DEFAULT_COMMAND='rg --files --hidden --follow -g "!{.git,node_modules}/*" 2>/dev/null'
-export FZF_CTRL_T_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,node_modules}/*" 2>/dev/null'
-
 eval "$(direnv hook zsh)"
 
