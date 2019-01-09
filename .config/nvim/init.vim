@@ -23,6 +23,7 @@ Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-surround'
 Plug 'airblade/vim-gitgutter'
 Plug 'prettier/vim-prettier', { 'do': 'npm install' }
+Plug 'sheerun/vim-polyglot'
 call plug#end()
 
 filetype plugin indent on
@@ -78,7 +79,7 @@ let g:LanguageClient_serverCommands = {
     \ 'rust': ['rustup', 'run', 'stable', 'rls'],
     \ }
 
-function LC_maps()
+function! LC_maps()
   if has_key(g:LanguageClient_serverCommands, &filetype)
     nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
     nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
