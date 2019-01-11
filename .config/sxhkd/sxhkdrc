@@ -4,11 +4,23 @@ super + {_,shift +}{h,j,k,l}
 super + {_, shift +}{1-9,0}
   bspc {desktop --focus, node --to-desktop} '^{1-9,10}'
 
-super + m
-  bspc desktop --layout next
+super + bracket{left,right}
+  bspc desktop --focus {prev,next}.local
+
+super + {r,Tab}
+  bspc {node,desktop} --focus last
+
+super + {_,shift + }c
+  bspc node --focus {next,prev}.local
 
 super + {_, shift +}q
   bspc node --{close,kill}
+
+super + m
+  bspc desktop --layout next
+
+super + {t,shift + t,s,alt + Return}
+  bspc node --state '~{tiled,pseudo_tiled,floating,fullscreen}' || bspc node --state tiled
 
 super + alt + {h,j,k,l}
   bspc node --resize {left -20 0,bottom 0 20,top 0 -20,right 20 0}
@@ -16,17 +28,11 @@ super + alt + {h,j,k,l}
 super + alt + shift + {h,j,k,l}
   bspc node --resize {right -20 0,top 0 20,bottom 0 -20,left 20 0}
 
-super + {t,shift + t,s,alt + Return}
-  bspc node --state '~{tiled,pseudo_tiled,floating,fullscreen}' || bspc node --state tiled
+super + alt + {1-9,0}
+  bspc node @parent --ratio 0.{1-9,61803}
 
-super + {_,shift + }c
-  bspc node --focus {next,prev}.local
-
-super + bracket{left,right}
-  bspc desktop --focus {prev,next}.local
-
-super + {r,Tab}
-  bspc {node,desktop} --focus last
+super + {_, alt +}x
+  bspc node @parent --{equalize,balance}
 
 super + ctrl + {h,j,k,l}
   bspc node --presel-dir {west,south,north,east}
