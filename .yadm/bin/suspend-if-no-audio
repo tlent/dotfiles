@@ -1,7 +1,5 @@
 #!/bin/bash
 
 if cat /proc/asound/card*/pcm*/sub*/status | (! grep RUNNING); then
-  mpc pause
-  playerctl pause
   systemctl suspend
 fi
