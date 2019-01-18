@@ -24,6 +24,7 @@ Plug 'tpope/vim-surround'
 Plug 'airblade/vim-gitgutter'
 Plug 'prettier/vim-prettier', { 'do': 'npm install' }
 Plug 'sheerun/vim-polyglot'
+Plug 'tpope/vim-repeat'
 call plug#end()
 
 filetype plugin indent on
