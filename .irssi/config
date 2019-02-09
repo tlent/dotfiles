@@ -37,6 +37,7 @@ chatnets = {
 channels = (
   { name = "#rust"; chatnet = "mozilla"; autojoin = "yes"; },
   { name = "#rust-beginners"; chatnet = "mozilla"; autojoin = "yes"; },
+  { name = "#rust-gamedev"; chatnet = "mozilla"; autojoin = "yes"; },
   { name = "#programming"; chatnet = "Freenode"; autojoin = "yes"; },
   { name = "#python"; chatnet = "Freenode"; autojoin = "yes"; },
   { name = "#Node.js"; chatnet = "Freenode"; autojoin = "yes"; },
