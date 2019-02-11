@@ -87,7 +87,7 @@ XF86AudioNext
 
 # Apply bspwm config
 super + shift + e
-  $HOME/.config/bspwm/bspwmrc reload
+  $HOME/.config/bspwm/bspwmrc
 
 # Reload sxhkd config
 super + shift + r
