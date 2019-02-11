@@ -42,7 +42,7 @@ xset r rate 350 50
 compton -b
 
 # Set background
-feh --bg-fill $HOME/wallpaper.jpg
+hsetroot -solid "#403D58"
 
 # Start redshift (Flux-like)
 redshift &
