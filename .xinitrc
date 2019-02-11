@@ -44,8 +44,8 @@ xrandr --output DVI-D-0 --mode 1920x1080 --rate 144
 # Start compton
 compton -b
 
-# Set background color
-hsetroot -solid "#7F4145"
+# Set background
+feh --bg-fill $HOME/wallpaper.jpg
 
 # Start redshift (Flux-like)
 redshift &
