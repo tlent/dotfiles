@@ -38,9 +38,6 @@ xsetroot -cursor_name left_ptr
 # Set key repeat delay and rate
 xset r rate 350 50
 
-# Set resolution and refresh rate
-xrandr --output DVI-D-0 --mode 1920x1080 --rate 144
-
 # Start compton
 compton -b
 
