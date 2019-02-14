@@ -47,9 +47,6 @@ export PATH="${NPM_PACKAGES_PATH}:${CARGO_PATH}:${YARN_PATH}:${PIP_PATH}:${CS140
 unset MANPATH
 export MANPATH="${NPM_PACKAGES}/share/man:$(manpath)"
 
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-source /usr/share/nvm/init-nvm.sh
 source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
 eval "$(direnv hook zsh)"
