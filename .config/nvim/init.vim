@@ -34,7 +34,6 @@ set autoindent
 set shiftround
 set expandtab
 
-set termguicolors
 let g:gruvbox_contrast_dark = 'hard'
 let g:gruvbox_contrast_light = 'hard'
 colorscheme gruvbox
@@ -62,8 +61,8 @@ nnoremap <silent> <leader>g :GFiles<CR>
 
 nnoremap <silent> <leader>r :b#<CR>
 
-let g:python_host_prog = '/usr/bin/python2'
-let g:python3_host_prog = '/usr/bin/python3'
+let g:python_host_prog = '/usr/local/bin/python2'
+let g:python3_host_prog = '/usr/local/bin/python3'
 
 " Syntastic
 let g:syntastic_always_populate_loc_list = 1

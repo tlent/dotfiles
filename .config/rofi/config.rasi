@@ -1,6 +1,0 @@
-configuration {
-  font: "TamzenForPowerline 10";
-  disable-history: true;
-  theme: "/usr/share/rofi/themes/gruvbox-dark-hard.rasi";
-  modi: "window,run,ssh,drun";
-}

@@ -1,5 +1,0 @@
-#!/bin/bash
-
-if cat /proc/asound/card*/pcm*/sub*/status | (! grep RUNNING); then
-  systemctl suspend
-fi

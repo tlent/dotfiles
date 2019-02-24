@@ -1,12 +1,14 @@
 export EDITOR="nvim"
 alias vim=nvim
 
+export BAT_THEME="base16-gruvbox-dark-hard"
+
 setopt NO_NOMATCH # See https://github.com/robbyrussell/oh-my-zsh-issues/449
 setopt HIST_IGNORE_SPACE
 
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 
-source /usr/share/zsh/share/antigen.zsh
+source /usr/local/share/antigen/antigen.zsh
 antigen use oh-my-zsh
 
 antigen bundle extract
@@ -35,19 +37,16 @@ export BAT_THEME="base16-gruvbox-dark-hard"
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow -g "!{.git,node_modules}/*" 2>/dev/null'
 export FZF_CTRL_T_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,node_modules}/*" 2>/dev/null'
 export VIRTUAL_ENV_DISABLE_PROMPT=1
-export NPM_PACKAGES="${HOME}/.npm-packages" # For global npm packages without root
 
-NPM_PACKAGES_PATH="${HOME}/.npm-packages"
 CARGO_PATH="${HOME}/.cargo/bin"
-YARN_PATH="$(yarn global bin)"
+PYTHON_PATH="$(brew --prefix)/opt/python/libexec/bin"
 PIP_PATH="$(python -m site --user-base)/bin"
+CARGO_PATH="$HOME/.cargo/bin"
 CS140E_PATH="/usr/local/bin/aarch64-none-elf/bin"
-export PATH="${NPM_PACKAGES_PATH}:${CARGO_PATH}:${YARN_PATH}:${PIP_PATH}:${CS140E_PATH}:${PATH}"
+export PATH="${CARGO_PATH}:${PIP_PATH}:${CS140E_PATH}:${PYTHON_PATH}:${PATH}"
 
-unset MANPATH
-export MANPATH="${NPM_PACKAGES}/share/man:$(manpath)"
+source /usr/local/opt/fzf/shell/key-bindings.zsh
+source /usr/local/opt/fzf/shell/completion.zsh
 
-source /usr/share/fzf/key-bindings.zsh
-source /usr/share/fzf/completion.zsh
 eval "$(direnv hook zsh)"
 
