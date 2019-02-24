@@ -3,7 +3,7 @@
   name = Thomas Lent
 [core]
   excludesfile = ~/.gitignore
-  pager = less -XRMIQ
+  pager = less -XRMI
 [merge]
   tool = vimdiff
 [diff]
