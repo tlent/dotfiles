@@ -38,9 +38,6 @@ xsetroot -cursor_name left_ptr
 # Set key repeat delay and rate
 xset r rate 350 50
 
-# Start compton
-compton -b
-
 # Set background
 feh --bg-center --no-fehbg $HOME/wallpaper.png
 
