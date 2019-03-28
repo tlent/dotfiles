@@ -98,10 +98,15 @@ label = %date%
 [module/volume]
 type = internal/alsa
 
+master-mixer = Master
+speaker-mixer = Front
+headphone-mixer = Headphone
+headphone-id = 41
+
 ;format-volume = <ramp-volume> <label-volume>
 format-volume-foreground = ${colors.yellow}
 label-volume = %percentage%
-mapped = true
+;mapped = true
 
 format-muted = <label-muted>
 format-muted-foreground = ${colors.red}
@@ -115,9 +120,6 @@ label-muted = %percentage%
 
 ;ramp-headphones-0 = 
 ;ramp-headphones-1 = 
-
-headphone-mixer = Headphone
-headphone-id = 41
 
 interval = 2
 
