@@ -55,6 +55,12 @@ super + @space
 super + f
   firefox
 
+super + v
+  code
+
+super + period
+  if [ $(pgrep redshift) ]; then pkill redshift; else redshift; fi
+
 Print
   maim | tee /tmp/screenshot-$(date +%F_%T).png | xclip -selection c -t image/png
 

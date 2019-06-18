@@ -37,12 +37,13 @@ export FZF_CTRL_T_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,n
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 export NPM_PACKAGES="${HOME}/.npm-packages" # For global npm packages without root
 
+GO_PATH="${HOME}/go/bin"
 NPM_PACKAGES_PATH="${HOME}/.npm-packages"
 CARGO_PATH="${HOME}/.cargo/bin"
 YARN_PATH="$(yarn global bin)"
 PIP_PATH="$(python -m site --user-base)/bin"
 CS140E_PATH="/usr/local/bin/aarch64-none-elf/bin"
-export PATH="${NPM_PACKAGES_PATH}:${CARGO_PATH}:${YARN_PATH}:${PIP_PATH}:${CS140E_PATH}:${PATH}"
+export PATH="${GO_PATH}:${NPM_PACKAGES_PATH}:${CARGO_PATH}:${YARN_PATH}:${PIP_PATH}:${CS140E_PATH}:${PATH}"
 
 unset MANPATH
 export MANPATH="${NPM_PACKAGES}/share/man:$(manpath)"
@@ -50,4 +51,5 @@ export MANPATH="${NPM_PACKAGES}/share/man:$(manpath)"
 source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
 eval "$(direnv hook zsh)"
+source <(kubectl completion zsh)
 
