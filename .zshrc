@@ -4,7 +4,7 @@ alias vim=nvim
 setopt NO_NOMATCH # See https://github.com/robbyrussell/oh-my-zsh-issues/449
 setopt HIST_IGNORE_SPACE
 
-ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 
 source /usr/share/zsh/share/antigen.zsh
 antigen use oh-my-zsh
@@ -22,7 +22,7 @@ antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-history-substring-search
 
-antigen theme https://github.com/denysdovhan/spaceship-zsh-theme spaceship
+antigen theme denysdovhan/spaceship-prompt
 
 antigen apply
 
@@ -44,6 +44,8 @@ YARN_PATH="$(yarn global bin)"
 PIP_PATH="$(python -m site --user-base)/bin"
 CS140E_PATH="/usr/local/bin/aarch64-none-elf/bin"
 export PATH="${GO_PATH}:${NPM_PACKAGES_PATH}:${CARGO_PATH}:${YARN_PATH}:${PIP_PATH}:${CS140E_PATH}:${PATH}"
+
+export DOCKER_CONFIG=$HOME/.docker
 
 unset MANPATH
 export MANPATH="${NPM_PACKAGES}/share/man:$(manpath)"
