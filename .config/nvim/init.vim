@@ -38,7 +38,7 @@ set termguicolors
 let g:gruvbox_contrast_dark = 'hard'
 let g:gruvbox_contrast_light = 'hard'
 colorscheme gruvbox
-set background=light
+set background=dark
 
 let g:airline_powerline_fonts = 1
 

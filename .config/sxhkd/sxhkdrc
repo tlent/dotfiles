@@ -10,9 +10,6 @@ super + bracket{left,right}
 super + {r,Tab}
   bspc {node,desktop} --focus last
 
-super + {_,shift + }c
-  bspc node --focus {next,prev}.local
-
 super + {_, shift +}q
   bspc node --{close,kill}
 
@@ -55,7 +52,7 @@ super + @space
 super + f
   firefox
 
-super + v
+super + c
   code
 
 super + period
