@@ -31,8 +31,8 @@ bindkey '^[[A' history-substring-search-up
 # Down arrow
 bindkey '^[[B' history-substring-search-down
 
-export FZF_DEFAULT_COMMAND='rg --files --hidden --follow -g "!{.git,node_modules}/*" 2>/dev/null'
-export FZF_CTRL_T_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,node_modules}/*" 2>/dev/null'
+export FZF_DEFAULT_COMMAND="rg --files --hidden --follow -g '!{.git,node_modules}/*' -g '!{yarn.lock,package-lock.json,go.sum}' 2>/dev/null"
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 export NPM_PACKAGES="${HOME}/.npm-packages" # For global npm packages without root
 
@@ -42,7 +42,8 @@ NPM_PACKAGES_PATH="${HOME}/.npm-packages"
 YARN_PATH="$(yarn global bin)"
 PIP_PATH="$(python -m site --user-base)/bin"
 CS140E_PATH="/usr/local/bin/aarch64-none-elf/bin"
-export PATH="${GO_PATH}:${CARGO_PATH}:${NPM_PACKAGES_PATH}:${YARN_PATH}:${PIP_PATH}:${CS140E_PATH}:${PATH}"
+HOME_PATH="${HOME}/bin"
+export PATH="${GO_PATH}:${CARGO_PATH}:${NPM_PACKAGES_PATH}:${YARN_PATH}:${PIP_PATH}:${CS140E_PATH}:${HOME_PATH}:${PATH}"
 
 export DOCKER_CONFIG=$HOME/.docker
 
