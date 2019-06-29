@@ -1,0 +1,12 @@
+#!/bin/bash
+
+amixer cget iface=CARD,name='Front Headphone Jack' | grep -q values=on
+SHOULD_USE_HEADPHONE=$?
+
+echo $SHOULD_USE_HEADPHONE
+
+if [ $SHOULD_USE_HEADPHONE -eq 0 ]; then
+  amixer set Headphone "$1"
+else
+  amixer set Front "$1"
+fi

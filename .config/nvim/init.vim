@@ -6,25 +6,23 @@ Plug 'tpope/vim-sensible'
 Plug 'morhetz/gruvbox'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'scrooloose/syntastic'
-Plug 'rust-lang/rust.vim'
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
-Plug 'ncm2/ncm2'
-Plug 'roxma/nvim-yarp'
-Plug 'ncm2/ncm2-bufword'
-Plug 'ncm2/ncm2-github'
-Plug 'ncm2/ncm2-path'
 Plug 'junegunn/fzf.vim'
 Plug 'ap/vim-css-color'
 Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-surround'
-Plug 'airblade/vim-gitgutter'
-Plug 'prettier/vim-prettier', { 'do': 'npm install' }
-Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-commentary'
+Plug 'airblade/vim-gitgutter'
+Plug 'sheerun/vim-polyglot'
+
+Plug 'w0rp/ale'
+
+Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
+Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
+
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'Shougo/deoplete.nvim'
+
 call plug#end()
 
 filetype plugin indent on
@@ -37,6 +35,7 @@ set expandtab
 let g:gruvbox_contrast_dark = 'hard'
 let g:gruvbox_contrast_light = 'hard'
 colorscheme gruvbox
+set background=light
 
 let g:airline_powerline_fonts = 1
 
@@ -52,55 +51,53 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-nnoremap <A-j> :tabn<CR>
-nnoremap <A-k> :tabp<CR>
+nnoremap <silent> <leader>, :e $HOME/.config/nvim/init.vim<CR>
+
+inoremap (( (<CR>)<C-c>O
+inoremap (, (<CR>),<C-c>O
+inoremap {{ {<CR>}<C-c>O
+inoremap {, {<CR>},<C-c>O
+inoremap [[ [<CR>]<C-c>O
+inoremap [, [<CR>],<C-c>O
+
+nmap <A-k> <Plug>(ale_previous_wrap)
+nmap <A-j> <Plug>(ale_next_wrap)
+
+" Customized :Rg
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(join([
+  \     "rg --column --line-number --no-heading --color=always --smart-case ",
+  \     "--hidden --follow -g '!{.git,node_modules}/*' ",
+  \     "-g '!{yarn.lock,package-lock.json,go.sum}' "
+  \   ]).shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
 
 nnoremap <silent> <leader><leader> :Buffers<CR>
 nnoremap <silent> <leader>f :Files<CR>
 nnoremap <silent> <leader>g :GFiles<CR>
-
-nnoremap <silent> <leader>r :b#<CR>
+nnoremap <silent> <leader>/ :BLines<CR>
+nnoremap <silent> <leader>p :Commands<CR>
+nnoremap <silent> <leader>r :Rg<CR>
+nnoremap <silent> <leader><tab> :b#<CR>
 
 let g:python_host_prog = '/usr/local/bin/python2'
 let g:python3_host_prog = '/usr/local/bin/python3'
 
-" Syntastic
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+" Completion
+let g:deoplete#enable_at_startup = 1
+call deoplete#custom#option('omni_patterns', { 'go': '[^. *\t]\.\w*' })
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | silent! pclose | endif
 
-" Rust
-let g:rustfmt_autosave = 1
-
-" LanguageClient
-let g:LanguageClient_autoStart = 1
-let g:LanguageClient_serverCommands = {
-    \ 'rust': ['rustup', 'run', 'stable', 'rls'],
-    \ }
-
-function! LC_maps()
-  if has_key(g:LanguageClient_serverCommands, &filetype)
-    nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-    nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-    nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
-    nnoremap <silent> S :call LanguageClient#textDocument_documentSymbol()<CR>
-    nnoremap <silent> gr :call LanguageClient#textDocument_references()<CR>
-    set formatexpr=LanguageClient#textDocument_rangeFormatting_sync()
-  endif
-endfunction
-
-autocmd FileType * call LC_maps()
-
-" ncm2
-autocmd BufEnter * call ncm2#enable_for_buffer()
-set completeopt=noinsert,menuone,noselect
-set shortmess+=c
-inoremap <c-c> <ESC>
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
-" Prettier
-let g:prettier#autoformat = 0
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
+let g:ale_fixers = {
+\   'javascript': ['prettier', 'eslint'],
+\   'typescript': ['prettier', 'eslint'],
+\   'markdown': ['prettier'],
+\   'json': ['prettier'],
+\   'html': ['prettier'],
+\   'css': ['prettier'],
+\}
+let g:ale_fix_on_save = 1
 

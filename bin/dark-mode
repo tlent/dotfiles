@@ -1,0 +1,4 @@
+#!/bin/bash
+
+sed -i 's/^colors: \*.*$/colors: *dark/g' $HOME/.config/alacritty/alacritty.yml
+sed -i 's/^set background=.*$/set background=dark/g' $HOME/.config/nvim/init.vim
