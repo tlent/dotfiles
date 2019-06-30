@@ -39,7 +39,7 @@ xsetroot -cursor_name left_ptr
 xset r rate 350 50
 
 # Set background
-feh --bg-center --no-fehbg $HOME/wallpaper.png
+feh --bg-center --no-fehbg $HOME/wallpapers/wallpaper.png
 
 # Start redshift (Flux-like)
 redshift &
