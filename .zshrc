@@ -36,6 +36,8 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 export NPM_PACKAGES="${HOME}/.npm-packages" # For global npm packages without root
 
+export GOPATH="${HOME}/go"
+
 GO_PATH="${HOME}/go/bin"
 CARGO_PATH="${HOME}/.cargo/bin"
 NPM_PACKAGES_PATH="${HOME}/.npm-packages"
