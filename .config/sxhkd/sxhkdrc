@@ -68,10 +68,10 @@ control + shift + alt + {s,h,r,f}
   {systemctl suspend,systemctl hibernate,systemctl reboot,systemctl poweroff}
 
 XF86AudioRaiseVolume
-  $HOME/.yadm/bin/change-volume 2%+
+  amixer set Master 2%+
 
 XF86AudioLowerVolume
-  $HOME/.yadm/bin/change-volume 2%-
+  amixer set Master 2%-
 
 XF86AudioMute
   amixer set Master toggle
