@@ -17,7 +17,6 @@ export DOCKER_CONFIG="${HOME}"/.docker
 export GOPATH="${HOME}/go"
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 export NPM_PACKAGES="${HOME}/.npm-packages" # For global npm packages without root
-export MANPATH="${NPM_PACKAGES}/share/man:${MANPATH}"
 
 CARGO_PATH="${HOME}/.cargo/bin"
 GO_PATH="${GOPATH}/bin"
