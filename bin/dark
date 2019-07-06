@@ -1,0 +1,9 @@
+#!/bin/bash
+
+ALACRITTY_CONFIG="${HOME}"/.config/alacritty/alacritty.yml
+VIM_CONFIG="${HOME}"/.config/nvim/init.vim
+VSCODE_CONFIG="${HOME}"/.config/Code/User/settings.json
+
+sed -i 's/^colors: \*.*$/colors: *dark/g' "${ALACRITTY_CONFIG}"
+sed -i 's/^set background=.*$/set background=dark/g' "${VIM_CONFIG}"
+sed -i 's/"workbench.colorTheme":\s*".*"/"workbench.colorTheme": "Gruvbox Dark Hard"/g' "${VSCODE_CONFIG}"
