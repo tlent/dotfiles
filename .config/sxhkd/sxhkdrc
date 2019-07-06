@@ -1,45 +1,64 @@
+# Focus or move in direction
 super + {_,shift +}{h,j,k,l}
   bspc node --{focus,swap} {west,south,north,east}
 
+# Super + <number> -> Focus desktop by number
+# Super + shift + <number> -> Move node to desktop
+# Super + alt + <number> -> Focus monitor by number
+# Super + alt + control + <number> -> Move to monitor
 super + {_, shift +, alt +, control + alt +}{1-9,0}
   bspc {desktop --focus, node --to-desktop, monitor --focus, node --to-monitor} '^{1-9,10}'
 
+# Focus next or previous desktop
 super + bracket{left,right}
   bspc desktop --focus {prev,next}.local
 
+# Super + r -> focus previous node
+# Super + tab -> focus previous desktop
 super + {r,Tab}
   bspc {node,desktop} --focus last
 
+# Close or kill node
 super + {_, shift +}q
   bspc node --{close,kill}
 
+# Monocle layout
 super + m
   bspc desktop --layout next
 
+# Super + t -> tile node
+# Super + shift + t -> pseudo tile node
+# Super + s -> floating node
+# Super + alt + return -> fullscreen node
+# Press any of the above again -> back to tile
 super + {t,shift + t,s,alt + Return}
   bspc node --state '~{tiled,pseudo_tiled,floating,fullscreen}' || bspc node --state tiled
 
-super + alt + {h,j,k,l}
-  bspc node --resize {left -20 0,bottom 0 20,top 0 -20,right 20 0}
-
-super + alt + shift + {h,j,k,l}
-  bspc node --resize {right -20 0,top 0 20,bottom 0 -20,left 20 0}
-
+# Change ratio
 super + alt + {1-9,0}
   bspc node @parent --ratio 0.{1-9,61803}
 
+# Equalize or balance
 super + {_, alt +}x
   bspc node @parent --{equalize,balance}
 
+# Presel in direction
 super + ctrl + {h,j,k,l}
   bspc node --presel-dir {west,south,north,east}
 
+# Presel ratio
 super + ctrl + {1-9,0}
   bspc node --presel-ratio 0.{1-9,61803}
 
+# Send the current node to the newest preselected node
+super + y
+  bspc node -n newest.!automatic.local
+
+# Cancel presel
 super + ctrl + space
   bspc node --presel-dir cancel
 
+# Cancel all presels on current desktop
 super + ctrl + shift + space
   bspc query --nodes --desktop | xargs -I id --max-args=1 bspc node id --presel-dir cancel
 
@@ -55,6 +74,7 @@ super + f
 super + c
   code
 
+# Toggle redshift (flux clone)
 super + period
   if [ $(pgrep redshift) ]; then pkill redshift; else redshift; fi
 
@@ -64,6 +84,11 @@ Print
 control + Print
   maim -s | tee /tmp/screenshot-$(date +%F_%T).png | xclip -selection c -t image/png
 
+# control + shift + alt +
+# s -> suspend
+# h -> hibernate
+# r -> reboot
+# f -> poweroff
 control + shift + alt + {s,h,r,f}
   {systemctl suspend,systemctl hibernate,systemctl reboot,systemctl poweroff}
 
