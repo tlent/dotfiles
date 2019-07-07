@@ -1,9 +1,17 @@
 #!/bin/bash
 
-ALACRITTY_CONFIG="${HOME}"/.config/alacritty/alacritty.yml
 VIM_CONFIG="${HOME}"/.config/nvim/init.vim
-VSCODE_CONFIG="${HOME}"/.config/Code/User/settings.json
+VSCODE_CONFIG="${HOME}/Library/Application Support/Code/User/settings.json"
 
-sed -i 's/^colors: \*.*$/colors: *light/g' "${ALACRITTY_CONFIG}"
-sed -i 's/^set background=.*$/set background=light/g' "${VIM_CONFIG}"
-sed -i 's/"workbench.colorTheme":\s*".*"/"workbench.colorTheme": "Gruvbox Light Hard"/g' "${VSCODE_CONFIG}"
+sed -i '' 's/^set background=.*$/set background=light/g' "${VIM_CONFIG}"
+sed -i '' 's/"workbench.colorTheme":\s*".*"/"workbench.colorTheme": "Gruvbox Light Hard"/g' "${VSCODE_CONFIG}"
+
+osascript <<'END'
+tell application "Terminal"
+    repeat with w from 1 to count windows
+        repeat with t from 1 to count tabs of window w
+            set current settings of tab t of window w to (first settings set whose name is "Gruvbox Light Hard")
+        end repeat
+    end repeat
+end tell
+END
