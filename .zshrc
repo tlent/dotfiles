@@ -7,8 +7,8 @@ setopt HIST_IGNORE_SPACE
 export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 
 # NOTE: these don't seem to work unless they are before antigen!
-source /usr/share/fzf/completion.zsh
-source /opt/google-cloud-sdk/completion.zsh.inc
+source /usr/local/Cellar/fzf/0.18.0/shell/completion.zsh
+source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc
 
 export FZF_DEFAULT_COMMAND="rg --files --hidden --follow -g '!{.git,node_modules}/*' -g '!{yarn.lock,package-lock.json,go.sum}' 2>/dev/null"
 export FZF_CTRL_T_COMMAND="${FZF_DEFAULT_COMMAND}"
@@ -25,7 +25,7 @@ PIP_PATH="${HOME}/.local/bin"
 HOME_PATH="${HOME}/bin"
 export PATH="${CARGO_PATH}:${GO_PATH}:${NPM_PACKAGES_PATH}:${PIP_PATH}:${HOME_PATH}:${PATH}"
 
-source /usr/share/zsh/share/antigen.zsh
+source /usr/local/share/antigen/antigen.zsh
 antigen use oh-my-zsh
 
 antigen bundle extract
@@ -47,7 +47,7 @@ antigen bundle sindresorhus/pure
 antigen apply
 
 # NOTE: this only seems to work after antigen!
-source /usr/share/fzf/key-bindings.zsh
+source /usr/local/Cellar/fzf/0.18.0/shell/key-bindings.zsh
 
 # Up arrow
 bindkey '^[[A' history-substring-search-up
